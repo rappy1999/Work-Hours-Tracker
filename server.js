@@ -93,3 +93,4 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/time-tracke
   });
 })
 .catch(err => { console.error('MongoDB connection error:'); console.error(err.message); console.error('Full error:', err); }); 
+// Fix applied by assistant
