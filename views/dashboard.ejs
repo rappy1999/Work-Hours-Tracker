@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Work Hours Tracker</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-content">
+        <h1>Work Hours Tracker</h1>
+        <div class="user-menu">
+          <span class="username"><%= user.name %></span>
+          <a href="/auth/logout" class="logout-btn">Logout</a>
+        </div>
+      </div>
+    </header>
+    
+    <div class="container">
+      <div class="card stats-card">
+        <h2>Quick Stats</h2>
+        <div class="stats-container">
+          <div class="stat-card">
+            <div class="stat-title">This Week</div>
+            <div class="stat-value" id="week-hours">0h 0m</div>
+            <div class="stat-subtitle">Saturday to Friday</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">This Pay Period</div>
+            <div class="stat-value" id="month-hours">0h 0m</div>
+            <div class="stat-subtitle" id="pay-period-dates">Two weeks: Sat-Fri</div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="main-content">
+        <div class="calendar-container card">
+          <h2>Calendar</h2>
+          <div class="calendar-header">
+            <button class="button button-secondary" id="prev-month">&lt;</button>
+            <h3 id="current-month">January 2023</h3>
+            <button class="button button-secondary" id="next-month">&gt;</button>
+          </div>
+          <div class="calendar-weekdays">
+            <div class="calendar-weekday">Sun</div>
+            <div class="calendar-weekday">Mon</div>
+            <div class="calendar-weekday">Tue</div>
+            <div class="calendar-weekday">Wed</div>
+            <div class="calendar-weekday">Thu</div>
+            <div class="calendar-weekday">Fri</div>
+            <div class="calendar-weekday">Sat</div>
+          </div>
+          <div class="calendar" id="calendar-days"></div>
+          <div class="calendar-note">Click on a date to add hours</div>
+        </div>
+        
+        <div class="card" id="entries-container">
+          <div class="header-actions">
+            <h2>Hours Worked</h2>
+          </div>
+          <div class="date-range-selector">
+            <label for="start-date">From:</label>
+            <input type="date" id="start-date">
+            <label for="end-date">To:</label>
+            <input type="date" id="end-date">
+            <button class="button button-secondary" id="apply-date-range">Apply</button>
+          </div>
+          <div id="entries-list" class="entries-list">
+            <div class="empty-state">No entries for this period. Click on a day in the calendar to add hours.</div>
+          </div>
+        </div>
+        
+        <div class="payperiod-column card">
+          <h2>Payperiods</h2>
+          <div class="payperiod-container" id="payperiod-list">
+            <!-- Payperiod dates will be generated here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Form -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <h2>Add Hours - <span id="form-date">Today</span></h2>
+      <form id="time-entry-form">
+        <div class="form-group">
+          <label for="start-time">Start Time</label>
+          <input type="time" id="start-time" value="09:00" required>
+        </div>
+        <div class="form-group">
+          <label for="end-time">End Time</label>
+          <input type="time" id="end-time" value="17:00" required>
+          <small>For shifts that end the next day (overnight), just enter the end time - the system will calculate correctly</small>
+        </div>
+        <div class="form-group">
+          <label for="lunch-duration">Lunch Break (minutes)</label>
+          <input type="number" id="lunch-duration" min="0" max="240" value="30" step="5">
+          <small>Time spent on lunch will be deducted from total work hours</small>
+        </div>
+        <div class="form-group">
+          <label for="notes">Notes (Optional)</label>
+          <textarea id="notes" rows="3"></textarea>
+        </div>
+        <div class="actions">
+          <button type="button" class="button button-secondary" id="cancel-form">Cancel</button>
+          <button type="submit" class="button">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/scripts.js"></script>
+</body>
+</html> 

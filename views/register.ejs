@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Work Hours Tracker</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <div class="auth-card">
+      <h1>Register Account</h1>
+      
+      <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+        <div class="alert alert-danger">
+          <% errors.forEach(error => { %>
+            <p><%= error.msg %></p>
+          <% }); %>
+        </div>
+      <% } %>
+      
+      <form action="/auth/register" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your name"
+            value="<%= typeof name !== 'undefined' ? name : '' %>"
+            required
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            value="<%= typeof email !== 'undefined' ? email : '' %>"
+            required
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Create a password"
+            required
+          />
+          <small>Password must be at least 6 characters</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="password2">Confirm Password</label>
+          <input
+            type="password"
+            id="password2"
+            name="password2"
+            placeholder="Confirm your password"
+            required
+          />
+        </div>
+        
+        <button type="submit" class="button">Register</button>
+      </form>
+      
+      <div class="auth-links">
+        <p>Already have an account? <a href="/auth/login">Login</a></p>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/js/scripts.js"></script>
+</body>
+</html> 
