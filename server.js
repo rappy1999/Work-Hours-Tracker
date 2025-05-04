@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+// Set strictQuery option to suppress deprecation warning
+mongoose.set("strictQuery", false);
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('passport');
@@ -90,4 +92,4 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/time-tracke
     console.log(`Server running on port ${PORT}`);
   });
 })
-.catch(err => console.log('MongoDB connection error:', err)); 
+.catch(err => { console.error('MongoDB connection error:'); console.error(err.message); console.error('Full error:', err); }); 
