@@ -34,7 +34,15 @@ app.use(session({
   saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.MONGO_URI || 'mongodb://localhost:27017/time-tracker',
-    collectionName: 'sessions'
+    collectionName: 'sessions',
+    mongoOptions: {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      ssl: true,
+      tls: true,
+      tlsAllowInvalidCertificates: true,
+      tlsAllowInvalidHostnames: true
+    }
   }),
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 // 1 day
@@ -67,7 +75,11 @@ app.get('/', (req, res) => {
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/time-tracker', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  ssl: true,
+  tls: true,
+  tlsAllowInvalidCertificates: true,
+  tlsAllowInvalidHostnames: true
 })
 .then(() => {
   console.log('MongoDB connected');
